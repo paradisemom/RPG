@@ -954,7 +954,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4f79f50083b5ca4685453b543e83b04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slashAnimPrefab: {fileID: 0}
+  slashAnimPrefab: {fileID: 4464257498971926111, guid: 5f8edbf88e543734ab25e482c588be06, type: 3}
   slashAnimSpawnPoint: {fileID: 45860485}
 --- !u!95 &1901522540
 Animator:
