@@ -1,0 +1,28 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class EnemyPathFinding : MonoBehaviour
+{
+    [SerializeField] private float moveSpeed=2f;
+    Rigidbody2D rb;
+    Vector2 MoveDir;
+
+    /// <summary>
+    /// Awake is called when the script instance is being loaded.
+    /// </summary>
+    private void Awake()
+    {
+        rb=GetComponent<Rigidbody2D>();
+    }
+    /// <summary>
+    /// This function is called every fixed framerate frame, if the MonoBehaviour is enabled.
+    /// </summary>
+    private void FixedUpdate()
+    {
+        rb.MovePosition(rb.position+MoveDir*(moveSpeed*Time.fixedDeltaTime));
+    }
+    public void MoveTo(Vector2 targetPosition){
+        MoveDir=targetPosition;
+    }
+}
