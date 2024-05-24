@@ -7,6 +7,16 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     [SerializeField]private int startingHealth=3;
+    KnockBack knockBack;
+    Flash flash;
+    /// <summary>
+    /// Awake is called when the script instance is being loaded.
+    /// </summary>
+    void Awake()
+    {
+        flash=GetComponent<Flash>();
+        knockBack=GetComponent<KnockBack>();
+    }
 
     private int currentHealth;
     /// <summary>
@@ -19,11 +29,11 @@ public class EnemyHealth : MonoBehaviour
     }
     public void TakeDamage(int damage){
         currentHealth-=damage;
-        Debug.Log(currentHealth);
-        DetectHealth();
+        knockBack.GetKonckBack(PlayerController.Instance.transform,15f);
+        StartCoroutine(flash.FlashRoutine());
     }
 
-    private void DetectHealth()
+    public void DetectDeath()
     {
         if(currentHealth<=0){
             Destroy(gameObject);

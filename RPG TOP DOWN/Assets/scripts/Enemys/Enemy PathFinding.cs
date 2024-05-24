@@ -7,12 +7,14 @@ public class EnemyPathFinding : MonoBehaviour
     [SerializeField] private float moveSpeed=2f;
     Rigidbody2D rb;
     Vector2 MoveDir;
+    KnockBack knockBack;
 
     /// <summary>
     /// Awake is called when the script instance is being loaded.
     /// </summary>
     private void Awake()
     {
+        knockBack=GetComponent<KnockBack>();
         rb=GetComponent<Rigidbody2D>();
     }
     /// <summary>
@@ -20,6 +22,7 @@ public class EnemyPathFinding : MonoBehaviour
     /// </summary>
     private void FixedUpdate()
     {
+        if(knockBack.gettingKnockBack){return;}
         rb.MovePosition(rb.position+MoveDir*(moveSpeed*Time.fixedDeltaTime));
     }
     public void MoveTo(Vector2 targetPosition){
