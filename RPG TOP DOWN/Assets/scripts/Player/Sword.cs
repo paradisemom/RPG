@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,7 @@ public class Sword : MonoBehaviour
     [SerializeField] private GameObject slashAnimPrefab;
     [SerializeField] private Transform slashAnimSpawnPoint;
     [SerializeField] private Transform weaponCollider;
+    [SerializeField]private float attakingCD=0.5f;
 
     private PlayerControls playerControls;
     private Animator myAnimator;
@@ -14,6 +16,7 @@ public class Sword : MonoBehaviour
     private ActiveWeapon activeWeapon;
 
     private GameObject slashAnim;
+    private bool attackBottonDown,isAttacking=false;
 
     private void Awake() {
         playerController = GetComponentInParent<PlayerController>();
@@ -28,19 +31,41 @@ public class Sword : MonoBehaviour
 
     void Start()
     {
-        playerControls.Combat.Attack.started += _ => Attack();
+        playerControls.Combat.Attack.started += _ => StartAttacking();
+        playerControls.Combat.Attack.canceled += _ => StopAttacking();
     }
+
+
 
     private void Update() {
         MouseFollowWithOffset();
+        Attack();
     }
 
-    private void Attack() {
-        myAnimator.SetTrigger("Attack");
-        weaponCollider.gameObject.SetActive(true);
+    private void StopAttacking()
+    {
+        attackBottonDown=false;
+    }
 
-        slashAnim = Instantiate(slashAnimPrefab, slashAnimSpawnPoint.position, Quaternion.identity);
-        slashAnim.transform.parent = this.transform.parent;
+    private void StartAttacking()
+    {
+        attackBottonDown=true;
+    }
+    private void Attack() {
+        if(attackBottonDown&&!isAttacking){
+            isAttacking=true;
+            myAnimator.SetTrigger("Attack");
+            weaponCollider.gameObject.SetActive(true);
+            slashAnim = Instantiate(slashAnimPrefab, slashAnimSpawnPoint.position, Quaternion.identity);
+            slashAnim.transform.parent = this.transform.parent;
+            StartCoroutine(AttackCDRoutine());
+        }
+    }
+
+    private IEnumerator AttackCDRoutine()
+    {
+        yield return new WaitForSeconds(attakingCD);
+        isAttacking=false;
     }
 
     public void DoneAttackingAnimEvent() {
