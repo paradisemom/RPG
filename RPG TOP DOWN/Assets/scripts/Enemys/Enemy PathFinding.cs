@@ -22,7 +22,7 @@ public class EnemyPathFinding : MonoBehaviour
     /// </summary>
     private void FixedUpdate()
     {
-        if(knockBack.gettingKnockBack){return;}
+        if(knockBack.gettingKnockedBack){return;}
         rb.MovePosition(rb.position+MoveDir*(moveSpeed*Time.fixedDeltaTime));
     }
     public void MoveTo(Vector2 targetPosition){
