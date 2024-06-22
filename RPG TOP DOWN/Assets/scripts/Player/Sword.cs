@@ -1,71 +1,47 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class Sword : MonoBehaviour
+public class Sword : MonoBehaviour,IWeapon
 {
     [SerializeField] private GameObject slashAnimPrefab;
     [SerializeField] private Transform slashAnimSpawnPoint;
     [SerializeField] private Transform weaponCollider;
     [SerializeField]private float attakingCD=0.5f;
 
-    private PlayerControls playerControls;
     private Animator myAnimator;
     private PlayerController playerController;
     private ActiveWeapon activeWeapon;
 
     private GameObject slashAnim;
-    private bool attackBottonDown,isAttacking=false;
 
     private void Awake() {
         playerController = GetComponentInParent<PlayerController>();
         activeWeapon = GetComponentInParent<ActiveWeapon>();
         myAnimator = GetComponent<Animator>();
-        playerControls = new PlayerControls();
-    }
-
-    private void OnEnable() {
-        playerControls.Enable();
-    }
-
-    void Start()
-    {
-        playerControls.Combat.Attack.started += _ => StartAttacking();
-        playerControls.Combat.Attack.canceled += _ => StopAttacking();
     }
 
 
 
     private void Update() {
         MouseFollowWithOffset();
-        Attack();
     }
 
-    private void StopAttacking()
-    {
-        attackBottonDown=false;
-    }
-
-    private void StartAttacking()
-    {
-        attackBottonDown=true;
-    }
-    private void Attack() {
-        if(attackBottonDown&&!isAttacking){
-            isAttacking=true;
-            myAnimator.SetTrigger("Attack");
-            weaponCollider.gameObject.SetActive(true);
-            slashAnim = Instantiate(slashAnimPrefab, slashAnimSpawnPoint.position, Quaternion.identity);
-            slashAnim.transform.parent = this.transform.parent;
-            StartCoroutine(AttackCDRoutine());
-        }
+    public void Attack() {
+        //isAttacking=true;
+        myAnimator.SetTrigger("Attack");
+        weaponCollider.gameObject.SetActive(true);
+        slashAnim=Instantiate(slashAnimPrefab,slashAnimSpawnPoint.position,Quaternion.identity);
+        slashAnim.transform.parent=this.transform.parent;
+        StartCoroutine(AttackCDRoutine());
     }
 
     private IEnumerator AttackCDRoutine()
     {
         yield return new WaitForSeconds(attakingCD);
-        isAttacking=false;
+        ActiveWeapon.Instance.ToggleIsAttacking(false);
     }
 
     public void DoneAttackingAnimEvent() {
