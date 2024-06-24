@@ -8950,6 +8950,7 @@ GameObject:
   m_Component:
   - component: {fileID: 746448469}
   - component: {fileID: 746448470}
+  - component: {fileID: 746448471}
   m_Layer: 0
   m_Name: ActiveWeapon
   m_TagString: Untagged
@@ -8985,7 +8986,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8c659b222fcb69438af6f541e7204d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentActiveWeapon: {fileID: 0}
+--- !u!114 &746448471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 746448468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3374bc7dc063f6348867474ff975da46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &766378032
 GameObject:
   m_ObjectHideFlags: 0
@@ -14286,6 +14298,7 @@ MonoBehaviour:
   moveSpeed: 4
   dashSpeed: 4
   trailRenderer: {fileID: 1238567502}
+  weaponCollider: {fileID: 1837809296}
 --- !u!95 &1971817734
 Animator:
   serializedVersion: 5
