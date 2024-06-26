@@ -34,8 +34,8 @@ public class ActiveInventory : MonoBehaviour
         ChangeActiveWeapon();
     }
     private void ChangeActiveWeapon(){
-        if(ActiveWeapon.Instance.currentActiveWeapon!=null){
-            Destroy(ActiveWeapon.Instance.currentActiveWeapon.gameObject);
+        if(ActiveWeapon.Instance.CurrentActiveWeapon!=null){
+            Destroy(ActiveWeapon.Instance.CurrentActiveWeapon.gameObject);
         }
         if(!transform.GetChild(activeSlotIndexNum).GetComponentInChildren<InventorySlot>()){
             ActiveWeapon.Instance.WeaponNull();
