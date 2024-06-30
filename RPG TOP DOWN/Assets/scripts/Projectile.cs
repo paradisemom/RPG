@@ -27,7 +27,6 @@ public class Projettile : MonoBehaviour
         indestroctible inDestroctible=other.gameObject.GetComponent<indestroctible>();
 
         if(!other.isTrigger&&(enemyHealth||inDestroctible)){
-            enemyHealth?.TakeDamage(weaponInfo.weaponDamage);
             Instantiate(particleOnHitPrefabVFX,transform.position,transform.rotation);
             Destroy(gameObject);
         }

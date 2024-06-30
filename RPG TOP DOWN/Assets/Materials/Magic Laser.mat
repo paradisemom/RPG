@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8736903086133498234
+--- !u!114 &-6972354852785753357
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Slash
+  m_Name: Magic Laser
   m_Shader: {fileID: -6465566751694194690, guid: 28a6c3e7cc2d02047baeb641b5aca7ba, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -55,5 +55,5 @@ Material:
     m_Ints: []
     m_Floats: []
     m_Colors:
-    - _Color: {r: 5.500422, g: 0.3950579, b: 0, a: 0}
+    - _Color: {r: 0.51906604, g: 2.5759575, b: 6.4730587, a: 0}
   m_BuildTextureStacks: []
