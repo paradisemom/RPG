@@ -8,12 +8,14 @@ public class EnemyPathFinding : MonoBehaviour
     Rigidbody2D rb;
     Vector2 MoveDir;
     KnockBack knockBack;
+    private SpriteRenderer spriteRenderer;
 
     /// <summary>
     /// Awake is called when the script instance is being loaded.
     /// </summary>
     private void Awake()
     {
+        spriteRenderer=GetComponent<SpriteRenderer>();
         knockBack=GetComponent<KnockBack>();
         rb=GetComponent<Rigidbody2D>();
     }
@@ -24,6 +26,12 @@ public class EnemyPathFinding : MonoBehaviour
     {
         if(knockBack.gettingKnockedBack){return;}
         rb.MovePosition(rb.position+MoveDir*(moveSpeed*Time.fixedDeltaTime));
+        if(MoveDir.x<0){
+            spriteRenderer.flipX=true;
+        }else
+        {
+            spriteRenderer.flipX=false;
+        }
     }
     public void MoveTo(Vector2 targetPosition){
         MoveDir=targetPosition;

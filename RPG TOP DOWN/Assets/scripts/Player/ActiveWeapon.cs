@@ -52,7 +52,7 @@ public class ActiveWeapon : SingleTon<ActiveWeapon>
         attackButtonDown=false;
     }
     private void Attack(){
-        if(attackButtonDown&&!isAttacking){
+        if(attackButtonDown&&!isAttacking&&CurrentActiveWeapon){
             AttackCoolDown();
             (CurrentActiveWeapon as IWeapon).Attack();
         }
