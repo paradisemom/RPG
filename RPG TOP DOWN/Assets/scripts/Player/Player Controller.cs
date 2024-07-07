@@ -14,6 +14,7 @@ public class PlayerController : SingleTon<PlayerController>
     private PlayerControls playerControls;
     private Vector2 movement;
     private Rigidbody2D rb;
+    private KnockBack knockBack;
     Animator myanimator;
     SpriteRenderer myspriteRenderer;
     private float startingMoveSpeeed;
@@ -25,6 +26,7 @@ public class PlayerController : SingleTon<PlayerController>
         rb = GetComponent<Rigidbody2D>();
         myspriteRenderer=GetComponent<SpriteRenderer>();
         myanimator=GetComponent<Animator>();
+        knockBack=GetComponent<KnockBack>();
     }
     private void Start() {
         playerControls.Combat.Dash.performed+= _ =>Dash();
@@ -55,6 +57,7 @@ public class PlayerController : SingleTon<PlayerController>
     }
 
     private void Move() {
+        if(knockBack.gettingKnockedBack){return;}
         rb.MovePosition(rb.position + movement * (moveSpeed * Time.fixedDeltaTime));
     }
     private void AdjustPalyerFacingDirection(){
