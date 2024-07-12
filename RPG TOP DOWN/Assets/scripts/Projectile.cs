@@ -6,15 +6,17 @@ public class Projettile : MonoBehaviour
 {
     [SerializeField]private float moveSpeed=22f;
     [SerializeField]private GameObject particleOnHitPrefabVFX;
+    [SerializeField]private bool isEnemyProjectile=false;
+    [SerializeField]private float projectileRange=10f;
 
-    private WeaponInfo weaponInfo;
+
     private Vector3 startPosition;
     private void Update() {
         MoveProjectile();
         DetectFireDistance();
     }
-    public void UpdateWeaponInfo(WeaponInfo weaponInfo){
-        this.weaponInfo=weaponInfo;
+    public void UpdateProjectileRange(float projectileRange){
+        this.projectileRange=projectileRange;
     }
     /// <summary>
     /// Sent when another object enters a trigger collider attached to this
@@ -24,15 +26,23 @@ public class Projettile : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         EnemyHealth enemyHealth=other.gameObject.GetComponent<EnemyHealth>();
-        indestroctible inDestroctible=other.gameObject.GetComponent<indestroctible>();
-
-        if(!other.isTrigger&&(enemyHealth||inDestroctible)){
-            Instantiate(particleOnHitPrefabVFX,transform.position,transform.rotation);
-            Destroy(gameObject);
+        Indestroctible inDestroctible=other.gameObject.GetComponent<Indestroctible>();
+        PlayerHealth player=other.gameObject.GetComponent<PlayerHealth>();
+        
+        if(!other.isTrigger&&(enemyHealth||inDestroctible||player)){
+            if(player&&isEnemyProjectile){
+                player.TakeDamage(1,transform);
+                Instantiate(particleOnHitPrefabVFX,transform.position,transform.rotation);
+                Destroy(gameObject);
+            }
         }
+
+            
+        
     }
+
     private void DetectFireDistance(){
-        if(Vector3.Distance(transform.position,startPosition)>weaponInfo.weaponRange){
+        if(Vector3.Distance(transform.position,startPosition)>projectileRange){
             Destroy(gameObject);
         }
     }

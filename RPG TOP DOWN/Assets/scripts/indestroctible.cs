@@ -2,12 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class indestroctible : MonoBehaviour
+public class Indestroctible : MonoBehaviour
 {
-    private void Start() {
-        
-    }
-    private void Update() {
-        
-    }
+
 }

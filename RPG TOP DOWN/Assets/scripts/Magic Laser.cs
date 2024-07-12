@@ -18,7 +18,7 @@ public class MagicLaser : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.GetComponent<indestroctible>()&&!other.isTrigger){
+        if(other.gameObject.GetComponent<Indestroctible>()&&!other.isTrigger){
             isGrowing=false;
         }
     }
