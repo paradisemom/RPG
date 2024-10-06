@@ -128,7 +128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 4
   particleOnHitPrefabVFX: {fileID: 5022567761208754289, guid: a1226077e6a057f479b51a2669ddb96c, type: 3}
-  isEnemyProjectile: 0
+  isEnemyProjectile: 1
   projectileRange: 10
 --- !u!58 &394217935736698667
 CircleCollider2D:
