@@ -54,7 +54,7 @@ public class EnemiAI : MonoBehaviour
         }
     }
     private void Roaming(){
-        timeRoaming=Time.deltaTime;
+        timeRoaming+=Time.deltaTime;
 
         enemyPathFinding.MoveTo(roamPosition);
         if(Vector2.Distance(transform.position,PlayerController.Instance.transform.position)<attackRange){

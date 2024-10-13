@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class UIFade : SingleTon<UIFade>
 {
     [SerializeField] private Image fadeScreen;
-    [SerializeField] private float fadeSpeed=1f;
+    // [SerializeField] private float fadeSpeed=1f;
 
     private IEnumerator fadeRoutine;
 

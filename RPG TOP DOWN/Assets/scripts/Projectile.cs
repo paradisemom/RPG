@@ -11,12 +11,18 @@ public class Projettile : MonoBehaviour
 
 
     private Vector3 startPosition;
+    private void Start() {
+        startPosition=transform.position;
+    }
     private void Update() {
         MoveProjectile();
         DetectFireDistance();
     }
     public void UpdateProjectileRange(float projectileRange){
         this.projectileRange=projectileRange;
+    }
+    public void UpdateMoveSpeed(float moveSpeed){
+        this.moveSpeed=moveSpeed;
     }
     /// <summary>
     /// Sent when another object enters a trigger collider attached to this
@@ -30,14 +36,14 @@ public class Projettile : MonoBehaviour
         PlayerHealth player=other.gameObject.GetComponent<PlayerHealth>();
         
         if(!other.isTrigger&&(enemyHealth||inDestroctible||player)){
-            if((player&&isEnemyProjectile)||(enemyHealth&&!isEnemyProjectile)){
-                player.TakeDamage(1,transform);
-                Instantiate(particleOnHitPrefabVFX,transform.position,transform.rotation);
-                Destroy(gameObject);
-            }else if(!other.isTrigger&&inDestroctible){
+            if((player&&isEnemyProjectile)){
+                player.TakeDamage(1,transform);           
+            }
+            if(inDestroctible){
                 Instantiate(particleOnHitPrefabVFX,transform.position,transform.rotation);
                 Destroy(gameObject);
             }
+            
         }
 
             
