@@ -5,6 +5,7 @@ using UnityEngine;
 public class DamegeSource : MonoBehaviour
 {
     private int damageAmount;
+    private EnemyHealth enemyHealth;
     private void Start() {
         MonoBehaviour currentActiveWeapon=ActiveWeapon.Instance.CurrentActiveWeapon;
         damageAmount=(currentActiveWeapon as IWeapon).GetWeaponInfo().weaponDamage;

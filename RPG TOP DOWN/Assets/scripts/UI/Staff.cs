@@ -15,7 +15,7 @@ public class Staff : MonoBehaviour,IWeapon
     private void Update() {
         MouseFollowWithOffset();
     }
-    public void Attack(){
+    public void Attack(){       
         animator.SetTrigger(ATTACK_HASH);
     }
     public void SpawnStaffProjectileAniEvent(){

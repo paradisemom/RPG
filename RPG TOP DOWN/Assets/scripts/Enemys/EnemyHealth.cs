@@ -31,6 +31,7 @@ public class EnemyHealth : MonoBehaviour
     }
     public void TakeDamage(int damage){
         currentHealth-=damage;
+        ScreenShakeManager.Instance.ShakeScreen();
         knockBack.GetKonckBack(PlayerController.Instance.transform,knockBackTrust);
         StartCoroutine(flash.FlashRoutine());
         StartCoroutine(CheckDetectDeath());

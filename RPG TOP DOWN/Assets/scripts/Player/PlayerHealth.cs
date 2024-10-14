@@ -15,7 +15,6 @@ public class PlayerHealth : MonoBehaviour
     private void Awake() {
         flash=GetComponent<Flash>();
         knockBack=GetComponent<KnockBack>();
-
     }
     private void Start() {
         currentHealth=maxHealth;
@@ -26,7 +25,9 @@ public class PlayerHealth : MonoBehaviour
         if(enemi){TakeDamage(1,other.transform);}
     }
     public void TakeDamage(int damageAmount,Transform hitTransform){
+        
         if(!canTakeDamage){return;}
+        ScreenShakeManager.Instance.ShakeScreen();
         knockBack.GetKonckBack(hitTransform,knockBackThrustAmount);
         StartCoroutine(flash.FlashRoutine());
         canTakeDamage=false;
