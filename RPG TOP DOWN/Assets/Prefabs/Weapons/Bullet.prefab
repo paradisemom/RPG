@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 28713d89c93e3c1479163f711f372eee, type: 3}
-  m_Color: {r: 0.6786668, g: 0.9528302, b: 0.937062, a: 1}
+  m_Color: {r: 0.68586683, g: 0.9296908, b: 0.93207544, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 4
-  particleOnHitPrefabVFX: {fileID: 5022567761208754289, guid: a1226077e6a057f479b51a2669ddb96c, type: 3}
+  particleOnHitPrefabVFX: {fileID: 6024438603085754531, guid: 915bcb5be9fe3104d94cc6852a437c09, type: 3}
   isEnemyProjectile: 1
   projectileRange: 10
 --- !u!58 &394217935736698667

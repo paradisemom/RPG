@@ -37,7 +37,8 @@ public class Projettile : MonoBehaviour
         
         if(!other.isTrigger&&(enemyHealth||inDestroctible||player)){
             if((player&&isEnemyProjectile)){
-                player.TakeDamage(1,transform);           
+                player.TakeDamage(1,transform);
+                Destroy(gameObject);           
             }
             if(inDestroctible){
                 Instantiate(particleOnHitPrefabVFX,transform.position,transform.rotation);
