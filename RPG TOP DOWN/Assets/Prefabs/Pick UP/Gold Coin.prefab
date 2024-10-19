@@ -186,3 +186,29 @@ MonoBehaviour:
   pickUpDistance: 5
   accelartionRate: 0.3
   moveSpeed: 6
+  animationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.99792886
+      value: -0.0000012237579
+      inSlope: -1.9807875
+      outSlope: -1.9807875
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.067952156
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  highY: 1.5
+  popDuration: 0.5
