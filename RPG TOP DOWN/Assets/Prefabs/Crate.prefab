@@ -135,6 +135,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goldCoinPrefab: {fileID: 6367906116743171104, guid: 1c0cdb4bd0f810646bc44a9d997ce048, type: 3}
+  healthPrefab: {fileID: 6367906116743171104, guid: 6578c538c9cbd1b49a10bfcce86753db, type: 3}
+  staminaPrefab: {fileID: 6367906116743171104, guid: 46afb037cd19d2a4f9017c682b3a46b7, type: 3}
 --- !u!114 &6602715495273276346
 MonoBehaviour:
   m_ObjectHideFlags: 0

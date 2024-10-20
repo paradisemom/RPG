@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerHealth : MonoBehaviour
+public class PlayerHealth : SingleTon<PlayerHealth>
 {
     [SerializeField]private int maxHealth=3;
     [SerializeField]private float knockBackThrustAmount=10f;
@@ -12,12 +12,16 @@ public class PlayerHealth : MonoBehaviour
     private bool canTakeDamage=true;
     private KnockBack knockBack;
     private Flash flash;
-    private void Awake() {
+    protected override void Awake(){
+        base.Awake();
         flash=GetComponent<Flash>();
         knockBack=GetComponent<KnockBack>();
     }
     private void Start() {
         currentHealth=maxHealth;
+    }
+    public void HealthPlayer(){
+        currentHealth+=1;
     }
     private void OnCollisionStay2D(Collision2D other) {
         EnemiAI enemi=other.gameObject.GetComponent<EnemiAI>();
