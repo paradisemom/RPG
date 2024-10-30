@@ -12,6 +12,5 @@
 10. 📥 Opened [PR #10](https://github.com/TheDanniCraft/activity-log/pull/10) in [TheDanniCraft/activity-log](https://github.com/TheDanniCraft/activity-log)
 <!--END_SECTION:activity-->
 
-###About ME
-<!--MY LINKS START-->
-<!--MY LINKS END-->
+paradise-nise到此一遊
+jack到此一遊
