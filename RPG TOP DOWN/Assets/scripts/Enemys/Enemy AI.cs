@@ -1,92 +1,97 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class EnemiAI : MonoBehaviour
+public class EnemyAI : MonoBehaviour
 {
-    [SerializeField]private float roamChangeDirFloat=2f;
-    [SerializeField]private float attackRange=5f;
-    [SerializeField]private MonoBehaviour enemyType;
-    [SerializeField] private float attackCooldown=1f;
-    [SerializeField] private bool stopMovingWhileAttacking=false;
+    [SerializeField] private float roamChangeDirFloat = 2f;
+    [SerializeField] private float attackRange = 5f;
+    [SerializeField] private MonoBehaviour enemyType;
+    [SerializeField] private float attackCooldown = 2f;
+    [SerializeField] private bool stopMovingWhileAttacking = false;
 
-    private bool canAttack=true;
-    private enum State{
-        Roaming,
+    private bool canAttack = true;
+
+    private enum State {
+        Roaming, 
         Attacking
     }
+
     private Vector2 roamPosition;
-    private float timeRoaming=0f;
+    private float timeRoaming = 0f;
+
     private State state;
-    private EnemyPathFinding enemyPathFinding;
-    /// <summary>
-    /// Awake is called when the script instance is being loaded.
-    /// </summary>
-    private void Awake()
-    {
-        enemyPathFinding=GetComponent<EnemyPathFinding>();
-        state=State.Roaming;
+    private EnemyPathFinding enemyPathfinding;
+
+    private void Awake() {
+        enemyPathfinding = GetComponent<EnemyPathFinding>();
+        state = State.Roaming;
     }
-    /// <summary>
-    /// Start is called on the frame when a script is enabled just before
-    /// any of the Update methods is called the first time.
-    /// </summary>
-    private void Start()
-    {
-        roamPosition=GetRoamingPosition();
+
+    private void Start() {
+        roamPosition = GetRoamingPosition();
     }
+
     private void Update() {
         MovementStateControl();
     }
-    private void MovementStateControl(){
+
+    private void MovementStateControl() {
         switch (state)
         {
-            
             default:
             case State.Roaming:
                 Roaming();
             break;
+
             case State.Attacking:
                 Attacking();
             break;
-
         }
     }
-    private void Roaming(){
-        timeRoaming+=Time.deltaTime;
 
-        enemyPathFinding.MoveTo(roamPosition);
-        if(Vector2.Distance(transform.position,PlayerController.Instance.transform.position)<attackRange){
-            state=State.Attacking;
+    private void Roaming() {
+        timeRoaming += Time.deltaTime;
+
+        enemyPathfinding.MoveTo(roamPosition);
+
+        if (Vector2.Distance(transform.position, PlayerController.Instance.transform.position) < attackRange) {
+            state = State.Attacking;
         }
-        if(timeRoaming>roamChangeDirFloat){
-            roamPosition=GetRoamingPosition();
+
+        if (timeRoaming > roamChangeDirFloat) {
+            roamPosition = GetRoamingPosition();
         }
     }
-    private void Attacking(){
-        if(Vector2.Distance(transform.position,PlayerController.Instance.transform.position)>attackRange){
-            state=State.Roaming;
+
+    private void Attacking() {
+        if (Vector2.Distance(transform.position, PlayerController.Instance.transform.position) > attackRange)
+        {
+            state = State.Roaming;
         }
-        if(attackRange!=0&&canAttack){
-            canAttack=false;
+
+        if (attackRange != 0 && canAttack) {
+
+            canAttack = false;
             (enemyType as IEnemy).Attack();
-            if(stopMovingWhileAttacking){
-                enemyPathFinding.StopMoving();
-            }else{
-                enemyPathFinding.MoveTo(roamPosition);
+
+            if (stopMovingWhileAttacking) {
+                enemyPathfinding.StopMoving();
+            } else {
+                enemyPathfinding.MoveTo(roamPosition);
             }
+
             StartCoroutine(AttackCooldownRoutine());
         }
     }
-    private IEnumerator AttackCooldownRoutine(){
+
+    private IEnumerator AttackCooldownRoutine() {
         yield return new WaitForSeconds(attackCooldown);
-        canAttack=true;
+        canAttack = true;
     }
 
-    private Vector2 GetRoamingPosition()
-    {
-        timeRoaming=0f;
-        return new Vector2(Random.Range(-1f,1f),Random.Range(-1f,1f)).normalized;
+    private Vector2 GetRoamingPosition() {
+        timeRoaming = 0f;
+        return new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
     }
 }

@@ -59,7 +59,7 @@ public class Shooter : MonoBehaviour,IEnemy
             GameObject newBullet=Instantiate(bulletPrefab,pos,Quaternion.identity);
             newBullet.transform.right=newBullet.transform.position-transform.position;
 
-            if(newBullet.TryGetComponent(out Projettile projettile)){
+            if(newBullet.TryGetComponent(out Projectile projettile)){
             projettile.UpdateMoveSpeed(bulletMoveSpeed);
             currentAngle+=angleStep;
             if(stagger){yield return new WaitForSeconds(timeBetweenProjectiles);}

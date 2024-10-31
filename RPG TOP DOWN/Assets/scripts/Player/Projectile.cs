@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projettile : MonoBehaviour
+public class Projectile : MonoBehaviour
 {
     [SerializeField]private float moveSpeed=22f;
     [SerializeField]private GameObject particleOnHitPrefabVFX;
@@ -38,7 +38,7 @@ public class Projettile : MonoBehaviour
         if(!other.isTrigger&&(enemyHealth||inDestroctible||player)){
             if((player&&isEnemyProjectile)){
                 Instantiate(particleOnHitPrefabVFX,transform.position,transform.rotation);
-                player.TakeDamage(1,transform);
+                player?.TakeDamage(1,transform);
                 Destroy(gameObject);           
             }
             if(inDestroctible){
