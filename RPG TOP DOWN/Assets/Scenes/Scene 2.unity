@@ -6793,6 +6793,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2883230227864532055, guid: cf4c5c2214e57964e95dd8672bf70be5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1998561449}
+    - targetCorrespondingSourceObject: {fileID: 2883230227864532055, guid: cf4c5c2214e57964e95dd8672bf70be5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1998561459}
   m_SourcePrefab: {fileID: 100100000, guid: cf4c5c2214e57964e95dd8672bf70be5, type: 3}
 --- !u!1001 &802175889
 PrefabInstance:
@@ -9289,6 +9292,21 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!114 &1998561459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 32224154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20a5da3d7c845494dae541fc9f1b4ee9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fullStaminaImage: {fileID: 21300000, guid: 4bf4c983ddf465c47a10b518b961f092, type: 3}
+  emptyStaminaImage: {fileID: 21300000, guid: c019c17b2c8309740835cebbf9fa507c, type: 3}
+  timeBetweenStaminaRefresh: 3
 --- !u!1 &2028900803
 GameObject:
   m_ObjectHideFlags: 0

@@ -72,7 +72,8 @@ public class PlayerController : SingleTon<PlayerController>
         }
     }
     private void Dash(){
-        if(!isDashing){
+        if(!isDashing&&Stamina.Instance.currentStamina>0){
+            Stamina.Instance.useStamina();
             isDashing=true;
             moveSpeed *=dashSpeed;
             trailRenderer.emitting=true;

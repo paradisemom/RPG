@@ -13,6 +13,8 @@ public class PlayerHealth : SingleTon<PlayerHealth>
     private bool canTakeDamage=true;
     private KnockBack knockBack;
     private Flash flash;
+    const string HEALTH_SLIDE_TEXT = "HeartSlider";
+    
     protected override void Awake(){
         base.Awake();
         flash=GetComponent<Flash>();
@@ -57,7 +59,7 @@ public class PlayerHealth : SingleTon<PlayerHealth>
     }
     private void UpdateHealthSlider(){
         if(healthSlider==null){
-            healthSlider=GameObject.Find("HeartSlider").GetComponent<Slider>();
+            healthSlider=GameObject.Find(HEALTH_SLIDE_TEXT).GetComponent<Slider>();
         }
         healthSlider.maxValue=maxHealth;
         healthSlider.value=currentHealth;
