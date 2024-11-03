@@ -28,7 +28,7 @@ public class EnemyPathFinding : MonoBehaviour
         rb.MovePosition(rb.position+MoveDir*(moveSpeed*Time.fixedDeltaTime));
         if(MoveDir.x<0){
             spriteRenderer.flipX=true;
-        }else
+        }else if(MoveDir.x>0)
         {
             spriteRenderer.flipX=false;
         }
