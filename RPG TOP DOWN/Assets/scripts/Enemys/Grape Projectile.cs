@@ -8,6 +8,7 @@ public class GrapeProjectile : MonoBehaviour
     [SerializeField] private AnimationCurve animCurve;
     [SerializeField] private float heightY=3f;
     [SerializeField] private GameObject grapeProjectileShadow;
+    [SerializeField] private GameObject grapeSplatterPrefab;
     private void Start() {
         GameObject grapeShadow=
         Instantiate(grapeProjectileShadow,transform.position+new Vector3(0,-3f,0),Quaternion.identity);
@@ -29,6 +30,7 @@ public class GrapeProjectile : MonoBehaviour
 
             yield return null;
         }
+        Instantiate(grapeSplatterPrefab,transform.position,Quaternion.identity);
         Destroy(gameObject);
     }
     private IEnumerator MoveGrapeShadowRoutine(GameObject grapeShadow,Vector3 startPos,Vector3 endPos){
