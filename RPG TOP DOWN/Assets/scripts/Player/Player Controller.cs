@@ -17,7 +17,7 @@ public class PlayerController : SingleTon<PlayerController>
     private KnockBack knockBack;
     Animator myanimator;
     SpriteRenderer myspriteRenderer;
-    private float startingMoveSpeeed;
+    private float startingMoveSpeed;
     private bool facingLeft=false;
     private bool isDashing=false;
     protected override void Awake(){
@@ -30,17 +30,25 @@ public class PlayerController : SingleTon<PlayerController>
     }
     private void Start() {
         playerControls.Combat.Dash.performed+= _ =>Dash();
-        startingMoveSpeeed=moveSpeed;
+        startingMoveSpeed=moveSpeed;
+        ActiveInventory.Instance.EquipStartingWeapon();
     }
 
 
     private void OnEnable() {
         playerControls.Enable();
     }
-
+    /// <summary>
+    /// This function is called when the behaviour becomes disabled or inactive.
+    /// </summary>
+    private void OnDisable()
+    {
+        playerControls.Disable();
+    }
     private void Update() {
         PlayerInput();
     }
+    
 
     private void FixedUpdate() {
         AdjustPalyerFacingDirection();
@@ -57,7 +65,7 @@ public class PlayerController : SingleTon<PlayerController>
     }
 
     private void Move() {
-        if(knockBack.gettingKnockedBack){return;}
+        if(knockBack.gettingKnockedBack||PlayerHealth.Instance.isDead){return;}
         rb.MovePosition(rb.position + movement * (moveSpeed * Time.fixedDeltaTime));
     }
     private void AdjustPalyerFacingDirection(){
@@ -71,22 +79,23 @@ public class PlayerController : SingleTon<PlayerController>
             facingLeft=false;
         }
     }
-    private void Dash(){
-        if(!isDashing&&Stamina.Instance.currentStamina>0){
-            Stamina.Instance.useStamina();
-            isDashing=true;
-            moveSpeed *=dashSpeed;
-            trailRenderer.emitting=true;
+    private void Dash() {
+        if (!isDashing && Stamina.Instance.CurrentStamina > 0) {
+            Stamina.Instance.UseStamina();
+            isDashing = true;
+            moveSpeed *= dashSpeed;
+            trailRenderer.emitting = true;
             StartCoroutine(EndDashRoutine());
         }
     }
-    private IEnumerator EndDashRoutine(){
-        float dashTime=.2f;
-        float dashCD=.25f;
+
+    private IEnumerator EndDashRoutine() {
+        float dashTime = .2f;
+        float dashCD = .25f;
         yield return new WaitForSeconds(dashTime);
-        moveSpeed=startingMoveSpeeed;
-        trailRenderer.emitting=false;
+        moveSpeed = startingMoveSpeed;
+        trailRenderer.emitting = false;
         yield return new WaitForSeconds(dashCD);
-        isDashing=false;
+        isDashing = false;
     }
 }

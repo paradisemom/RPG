@@ -4,20 +4,23 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class ActiveInventory : MonoBehaviour
+public class ActiveInventory : SingleTon<ActiveInventory>
 {
     private int activeSlotIndexNum=0;
     private PlayerControls playerControls;
-    private void Awake() {
+    protected override void Awake(){
+        base.Awake();
         playerControls=new PlayerControls();
     }
     private void Start() {
         playerControls.Inventory.Keyboard.performed+= ctx=>ToggleAvctiveSlot((int)ctx.ReadValue<float>());
 
-        ToggleActiveHeighLight(0);
     }
     private void OnEnable() {
         playerControls.Enable();
+    }
+    public void EquipStartingWeapon(){
+         ToggleActiveHeighLight(0);
     }
     private void ToggleAvctiveSlot(int numValue){
         ToggleActiveHeighLight(numValue-1);
@@ -41,9 +44,13 @@ public class ActiveInventory : MonoBehaviour
         InventorySlot inventorySlot=childTransform.GetComponentInChildren<InventorySlot>();
         WeaponInfo weaponInfo=inventorySlot.GetWeaponInfo();
         GameObject weaponToSpawn=weaponInfo.weaponPrefab;
-        GameObject newWeapon=Instantiate(weaponToSpawn,ActiveWeapon.Instance.transform.position,Quaternion.identity);
-        ActiveWeapon.Instance.transform.rotation=Quaternion.Euler(0,0,0);
-        newWeapon.transform.parent=ActiveWeapon.Instance.transform;
+        if(weaponInfo==null){
+            ActiveWeapon.Instance.WeaponNull();
+            return;
+        }
+        GameObject newWeapon=Instantiate(weaponToSpawn,ActiveWeapon.Instance.transform);
+        //ActiveWeapon.Instance.transform.rotation=Quaternion.Euler(0,0,0);
+        //newWeapon.transform.parent=ActiveWeapon.Instance.transform;
         ActiveWeapon.Instance.NewWeapon(newWeapon.GetComponent<MonoBehaviour>());
     }
 }
